@@ -1,53 +1,58 @@
 @extends('main')
 @section('container')
-<div class="body w-[90%] m-auto border border-slate-400 rounded-lg mt-3">
-    <h1 class="text-3xl ml-1">Daftar Siswa</h1>
-    <div class="overflow-x-auto text-2">
+<div class="body w-[90%] m-auto border border-slate-400 rounded-lg mt-5 p-3">
+    <h1 class="text-3xl text-center">Daftar Siswa</h1>
+    <button class="btn btn-active btn-sm btn-primary mt-4 mb-4" onclick="my_modal_4.showModal()" >Tambah Siswa</button>
+    <dialog id="my_modal_4" class="modal">
+        <form method="post" action="/siswa" class="modal-box w-11/12 max-w-5xl block">
+          <h3 class="font-bold text-lg text-center mb-5">Tambah Siswa</h3>
+            @csrf
+            <input type="text" placeholder="Masukan Nama Lengkap" class="input border w-full max-w-xs border-slate-800 mb-4" name="name"/>
+            <br>
+            <textarea class="textarea textarea-slate mb-4" placeholder="Masukan Alamat" name="alamat"></textarea>
+            <br>
+            <button class="btn btn-active btn-primary" type="submit">Primary</button>
+          <div class="modal-action">
+            <!-- if there is a button, it will close the modal -->
+            <button class="btn">Close</button>
+          </div>
+        </form>
+      </dialog>
+    <div class="table">
+    <div class=" overflow-x-auto text-2  border border-slate-400 rounded-lg p-2">
         <table class="table table-xs table-pin-rows table-pin-cols">
           <thead>
             <tr>
               <th></th>
               <td>Name</td>
-              <td>Job</td>
-              <td>company</td>
-              <td>location</td>
-              <td>Last Login</td>
-              <td>Favorite Color</td>
+              <td>Alamat</td>
+              <td>Kelas</td>
+              <td>Id Siswa</td>
+              <td>Aksi</td>
               <th></th>
             </tr>
           </thead>
           <tbody>
+
+            @foreach ($siswa as $murid )
             <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Littel, Schaden and Vandervort</td>
-              <td>Canada</td>
-              <td>12/16/2020</td>
-              <td>Blue</td>
-              <th>1</th>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Zemlak, Daniel and Leannon</td>
-              <td>United States</td>
-              <td>12/5/2020</td>
-              <td>Purple</td>
-              <th>2</th>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Carroll Group</td>
-              <td>China</td>
-              <td>8/15/2020</td>
-              <td>Red</td>
-              <th>3</th>
-            </tr>
-            <tr>
+                <th>{{ $loop->iteration }}</th>
+            <td>{{ $murid->name }}</td>
+                <td>{{ $murid->alamat }}</td>
+                <td>{{ $murid->kelas }}</td>
+                <td>{{ $murid->id_siswa }}</td>
+                <td><div class="badge badge-error gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  Hapus
+                </div>
+
+                <div class="badge badge-info gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  Edit
+                </div>
+              </td>
+              </tr>
+            @endforeach
           </tbody>
           <tfoot>
             <tr>
@@ -56,12 +61,11 @@
               <td>Job</td>
               <td>company</td>
               <td>location</td>
-              <td>Last Login</td>
-              <td>Favorite Color</td>
               <th></th>
             </tr>
           </tfoot>
         </table>
       </div>
+    </div>
 </div>
 @endsection
