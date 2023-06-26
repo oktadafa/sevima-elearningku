@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'id_siswa',
+        'nomor',
         'alamat',
     ];
 
@@ -33,6 +33,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function getRouteKeyName(): string
+{
+    return 'nomor';
+}
     /**
      * The attributes that should be cast.
      *

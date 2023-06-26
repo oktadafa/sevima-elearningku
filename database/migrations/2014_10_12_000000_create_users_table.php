@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string("alamat");
             $table->string("kelas")->nullable();
-            $table->integer("id_siswa")->unique();
+            $table->integer("nomor")->unique();
+            $table->string("jabatan")->default('siswa');
             $table->rememberToken();
             $table->timestamps();
         });

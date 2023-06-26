@@ -18,5 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::resource('siswa',UserController::class);
+Route::post('/siswa', [UserController::class, 'store']);
+Route::get('/siswa', [UserController::class, 'index']);
+Route::delete('/siswa/{user}',[UserController::class, 'destroy']);
+Route::get('/siswa/edit/{user}', [UserController::class, 'edit']);
+Route::patch('/siswa/{user}',[UserController::class, 'update']);
+// Route::delete('siswa/{id}', ['UserController@destroy']);

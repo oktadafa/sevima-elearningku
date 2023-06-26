@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $siswa = User::all();
+        $siswa = User::where('jabatan', 'siswa')->get();
         return view('siswa', [
             'siswa' => $siswa
         ]);
@@ -35,8 +35,10 @@ class UserController extends Controller
                 'name' => 'string|required',
                 'alamat' => 'required'
         ]);
-        $validate['id_siswa'] = mt_rand(0000,99999);
+        $validate['nomor'] = mt_rand(0000,99999);
         User::create($validate);
+
+        return redirect('/siswa');
     }
 
     /**
@@ -53,6 +55,10 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        return view('siswa.edit',[
+            'siswa' => $user
+
+        ]);
     }
 
     /**
@@ -60,7 +66,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required',
+            'alamat' => 'required'
+        ]);
+        User::where('nomor',$user->nomor)->update($validate);
+        return redirect('/siswa');
     }
 
     /**
@@ -68,6 +79,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+                return redirect('/siswa');
     }
 }

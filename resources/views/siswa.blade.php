@@ -18,6 +18,7 @@
           </div>
         </form>
       </dialog>
+
     <div class="table">
     <div class=" overflow-x-auto text-2  border border-slate-400 rounded-lg p-2">
         <table class="table table-xs table-pin-rows table-pin-cols">
@@ -40,16 +41,23 @@
             <td>{{ $murid->name }}</td>
                 <td>{{ $murid->alamat }}</td>
                 <td>{{ $murid->kelas }}</td>
-                <td>{{ $murid->id_siswa }}</td>
-                <td><div class="badge badge-error gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  Hapus
-                </div>
-
+                <td>{{ $murid->nomor }}</td>
+                <td>
+                    <form action="/siswa/{{ $murid->nomor}}" method="post" >
+                        @method('delete')
+                        @csrf
+                        <button type="submit" onclick="return confirm('anda yakin')">
+                            <div class="badge badge-error gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            Delete
+                          </div></button>
+                    </form>
+                    <a href="/siswa/edit/{{ $murid->nomor }}">
                 <div class="badge badge-info gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  Edit
+              Edit
                 </div>
+            </a>
               </td>
               </tr>
             @endforeach
