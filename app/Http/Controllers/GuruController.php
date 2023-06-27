@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $siswa = User::where('jabatan', 'siswa')->get();
-        return view('siswa', [
-            'siswa' => $siswa
-        ]);
+     return view('guru',[
+        'guru' => User::where('jabatan', 'guru')->get()
+     ]);
     }
 
     /**
@@ -23,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -32,15 +31,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-                'name' => 'string|required',
-                'alamat' => 'required'
-        ]);
-        $validate['nomor'] = mt_rand(0000,99999);
-        $validate['jabatan'] = 'siswa';
-        $validate['mapel'] = null;
-        User::create($validate);
+            'name' => 'string|required',
+            'alamat' => 'required'
+    ]);
+    $validate['nomor'] = mt_rand(0000,99999);
+    $validate['jabatan'] = 'guru';
+    User::create($validate);
 
-        return redirect('/siswa');
+    return redirect('/guru');
     }
 
     /**
@@ -57,10 +55,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        return view('siswa.edit',[
-            'siswa' => $user
-
-        ]);
     }
 
     /**
@@ -68,12 +62,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validate = $request->validate([
-            'name' => 'required',
-            'alamat' => 'required'
-        ]);
-        User::where('nomor',$user->nomor)->update($validate);
-        return redirect('/siswa');
+        //
     }
 
     /**
@@ -81,7 +70,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        User::destroy($user->id);
-                return redirect('/siswa');
+        //
     }
 }

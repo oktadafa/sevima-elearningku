@@ -9,7 +9,8 @@
               <li><a>Dashboard</a></li>
               <li><a href="siswa">Daftar Siswa</a></li>
               <li><a href="staff">Daftar Karyawan</a></li>
-              <li><a href="guru">Data Pelajaran</a></li>
+              <li><a href="guru">Daftar Guru</a></li>
+              <li><a href="mapel">Data Pelajaran</a></li>
             </ul>
           </div>
         </div>
