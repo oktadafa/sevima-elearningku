@@ -32,7 +32,8 @@ class GuruController extends Controller
     {
         $validate = $request->validate([
             'name' => 'string|required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'mapel' => 'required'
     ]);
     $validate['nomor'] = mt_rand(0000,99999);
     $validate['jabatan'] = 'guru';
@@ -55,6 +56,7 @@ class GuruController extends Controller
     public function edit(User $user)
     {
         //
+        return view('guru.edit');
     }
 
     /**

@@ -37,7 +37,6 @@ class UserController extends Controller
         ]);
         $validate['nomor'] = mt_rand(0000,99999);
         $validate['jabatan'] = 'siswa';
-        $validate['mapel'] = null;
         User::create($validate);
 
         return redirect('/siswa');
