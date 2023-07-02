@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("alamat");
             $table->string("kelas")->nullable();
             $table->integer("nomor")->unique();
-            $table->string('mapel');
             $table->string("jabatan");
             $table->rememberToken();
             $table->timestamps();

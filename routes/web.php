@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\GuruUserController;
+use App\Http\Controllers\SiswaUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +21,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/siswa', [UserController::class, 'store']);
-Route::get('/siswa', [UserController::class, 'index']);
-Route::delete('/siswa/{user}',[UserController::class, 'destroy']);
-Route::get('/siswa/edit/{user}', [UserController::class, 'edit']);
-Route::patch('/siswa/{user}',[UserController::class, 'update']);
+Route::post('/siswa', [SiswaUserController::class, 'store']);
+Route::get('/siswa', [SiswaUserController::class, 'index']);
+Route::delete('/siswa/{user}',[SiswaUserController::class, 'destroy']);
+Route::get('/siswa/edit/{user}', [SiswaUserController::class, 'edit']);
+Route::patch('/siswa/{user}',[SiswaUserController::class, 'update']);
 // Route::delete('siswa/{id}', ['UserController@destroy']);
 
-
-Route::resource('guru', GuruController::class);
+Route::get('/guru',[GuruUserController::class, 'index']);
+Route::post('/guru', [GuruUserController::class, 'store']);
+Route::get('/guru/{user}/edit', [GuruUserController::class, 'edit']);
+Route::patch('/guru/{user}', [GuruUserController::class, 'update']);
+Route::delete('/guru/{user}', [GuruUserController::class, 'destroy']);

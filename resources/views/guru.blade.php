@@ -9,17 +9,6 @@
             @csrf
             <input type="text" placeholder="Masukan Nama Lengkap" class="input border w-full max-w-xs border-slate-800 mb-4" name="name"/>
             <br>
-            <div class="form-control w-full max-w-xs">
-                <label class="label">
-                  <span class="label-text">Pilih Mapel</span>
-                </label>
-                <select class="select select-bordered" name="mapel">
-                  <option selected>Pilih Mapel</option>
-                  <option value="matematika">Matematika</option>
-                  <option value="ipa">Ipa</option>
-                </select>
-              </div>
-            <br>
             <textarea class="textarea textarea-slate mb-4 border border-black" placeholder="Masukan Alamat" name="alamat"></textarea>
             <br>
             <button class="btn btn-active btn-primary" type="submit">Tambah</button>
@@ -29,61 +18,55 @@
           </div>
         </form>
       </dialog>
-
     <div class="table">
-    <div class=" overflow-x-auto text-2  border border-slate-400 rounded-lg p-2">
+    <div class=" overflow-x-auto text-2  border border-slate-400 rounded-lg p-2 ">
+        @if(count($guru) == 0)
+   <h1 class="text-4xl text-center text-slate-500 my-20">Kosong</h1>
+        @else
         <table class="table table-xs table-pin-rows table-pin-cols">
-          <thead>
-            <tr>
-              <th></th>
-              <td>Name</td>
-              <td>Alamat</td>
-              <td>Mata Pelajaran</td>
-              <td>Id Guru</td>
-              <td>Aksi</td>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-
-            @foreach ($guru as $data )
-            <tr>
-                <th>{{ $loop->iteration }}</th>
-            <td>{{ $data->name }}</td>
-                <td>{{ $data->alamat }}</td>
-                <td>{{ Str::ucfirst($data->mapel)  }}</td>
-                <td>{{ $data->nomor }}</td>
-                <td>
-                    <form action="/guru/{{ $data->nomor}}" method="post" >
-                        @method('delete')
-                        @csrf
-                        <button type="submit" onclick="return confirm('anda yakin')">
-                            <div class="badge badge-error gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                            Delete
-                          </div></button>
-                    </form>
-                    <a href="/guru/{{ $data->nomor }}/edit">
-                <div class="badge badge-info gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-              Edit
-                </div>
-            </a>
-              </td>
+            <thead>
+              <tr>
+                <th></th>
+                <td>Name</td>
+                <td>Alamat</td>
+                <td>Mata Pelajaran</td>
+                <td>Id Guru</td>
+                <td>Aksi</td>
+                <th></th>
               </tr>
-            @endforeach
-          </tbody>
-          <tfoot>
-            <tr>
-              <th></th>
-              <td>Name</td>
-              <td>Job</td>
-              <td>company</td>
-              <td>location</td>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
+            </thead>
+            <tbody>
+  @foreach ($guru as $data )
+              <tr>
+                  <th>{{ $loop->iteration }}</th>
+              <td>{{ $data->name }}</td>
+                  <td>{{ $data->alamat }}</td>
+                  <td>{{ Str::ucfirst($data->mapel)  }}</td>
+                  <td>{{ $data->nomor }}</td>
+                  <td>
+                      <form action="/guru/{{ $data->nomor}}" method="post" >
+                          @method('delete')
+                          @csrf
+                          <button type="submit" onclick="return confirm('anda yakin')">
+                              <div class="badge badge-error gap-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                              Delete
+                            </div></button>
+                      </form>
+                      <a href="/guru/{{ $data->nomor }}/edit">
+                  <div class="badge badge-info gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                Edit
+                  </div>
+              </a>
+                </td>
+                </tr>
+              @endforeach
+
+            </tbody>
+
+          </table>
+        @endif
       </div>
     </div>
 </div>

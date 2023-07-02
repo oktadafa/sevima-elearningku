@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class GuruController extends Controller
+class GuruUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-     return view('guru',[
-        'guru' => User::where('jabatan', 'guru')->get()
-     ]);
+        $user = User::where('jabatan', 'guru')->get();
+        return view('/guru', [
+                'guru' => $user
+        ]);
     }
 
     /**
@@ -22,7 +23,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -30,16 +31,16 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'name' => 'string|required',
-            'alamat' => 'required',
-            'mapel' => 'required'
-    ]);
-    $validate['nomor'] = mt_rand(0000,99999);
-    $validate['jabatan'] = 'guru';
-    User::create($validate);
+        //
+        $validation = $request->validate([
+            'name' => 'required',
+            'alamat' => 'required'
+        ]);
+        $validation['jabatan'] = 'guru';
+        $validation['nomor'] = mt_rand(00000,99999);
+        User::create($validation);
 
-    return redirect('/guru');
+        return redirect('/guru');
     }
 
     /**
@@ -55,8 +56,9 @@ class GuruController extends Controller
      */
     public function edit(User $user)
     {
-        //
-        return view('guru.edit');
+        return view('guru.edit',[
+            'guru' => $user
+        ]);
     }
 
     /**
@@ -65,6 +67,12 @@ class GuruController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $validate = $request->validate([
+            'name' => 'required',
+            'alamat' => 'required'
+        ]);
+        User::where('nomor', $user->nomor)->update($validate);
+        return redirect('/guru');
     }
 
     /**
@@ -72,6 +80,7 @@ class GuruController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+    User::destroy($user->id);
+    return redirect('/guru');
     }
 }
