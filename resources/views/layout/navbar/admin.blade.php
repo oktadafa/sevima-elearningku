@@ -10,7 +10,19 @@
               <li><a href="/siswa">Daftar Siswa</a></li>
               <li><a href="/staff">Daftar Karyawan</a></li>
               <li><a href="/guru">Daftar Guru</a></li>
-              <li><a href="/mapel">Data Pelajaran</a></li>
+              <li><details>
+                <summary>Data Pelajaran</summary>
+                <ul class="p-2">
+                  <li><a href="/pelajaran">Data Mapel</a></li>
+                  <li><a href="/materi"><details>
+                    <summary>Data Materi dan tugas</summary>
+                    <ul class="p-2">
+                      <li><a href="/materi">Data Materi</a></li>
+                      <li><a href="/materi/create">Buat Materi</a></li>
+                    </ul>
+                  </details>Data Materi dan tugas</a></li>
+                </ul>
+              </details></li>
             </ul>
           </div>
         </div>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BabPelajaranController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\GuruUserController;
+use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +35,6 @@ Route::post('/guru', [GuruUserController::class, 'store']);
 Route::get('/guru/{user}/edit', [GuruUserController::class, 'edit']);
 Route::patch('/guru/{user}', [GuruUserController::class, 'update']);
 Route::delete('/guru/{user}', [GuruUserController::class, 'destroy']);
+
+Route::resource('/pelajaran', MapelController::class);
+Route::resource('/materi', BabPelajaranController::class);
