@@ -20,8 +20,9 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'alamat' => fake()->address(),
-            'kelas' => fake()->sentence(),
-            'id_siswa' => fake()->randomNumber(5,true),
+            'nomor' => fake()->randomNumber(5,true),
+            'email' => fake()->email(),
+            'password' => bcrypt('okta'),
             'remember_token' => Str::random(10),
         ];
     }

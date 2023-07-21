@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Guru;
 use Illuminate\Http\Request;
 
 class GuruUserController extends Controller
@@ -12,7 +12,7 @@ class GuruUserController extends Controller
      */
     public function index()
     {
-        $user = User::where('jabatan', 'guru')->get();
+        $user =Guru::all();
         return view('/guru', [
                 'guru' => $user
         ]);
@@ -33,12 +33,11 @@ class GuruUserController extends Controller
     {
         //
         $validation = $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'alamat' => 'required'
         ]);
-        $validation['jabatan'] = 'guru';
         $validation['nomor'] = mt_rand(00000,99999);
-        User::create($validation);
+        Guru::create($validation);
 
         return redirect('/guru');
     }
@@ -46,7 +45,7 @@ class GuruUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Guru $user)
     {
         //
     }
@@ -54,7 +53,7 @@ class GuruUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Guru $user)
     {
         return view('guru.edit',[
             'guru' => $user
@@ -64,23 +63,23 @@ class GuruUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Guru $user)
     {
         //
         $validate = $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'alamat' => 'required'
         ]);
-        User::where('nomor', $user->nomor)->update($validate);
+        Guru::where('nomor', $user->nomor)->update($validate);
         return redirect('/guru');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Guru $user)
     {
-    User::destroy($user->id);
+    Guru::destroy($user->id);
     return redirect('/guru');
     }
 }

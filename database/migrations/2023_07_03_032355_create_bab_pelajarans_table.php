@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('bab_pelajarans', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->foreignId('mapel_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

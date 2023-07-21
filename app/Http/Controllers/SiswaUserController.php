@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class SiswaUserController extends Controller
@@ -13,7 +13,7 @@ class SiswaUserController extends Controller
     public function index()
     {
         return view('siswa', [
-        'siswa' => User::where('jabatan', 'siswa')->get()
+        'siswa' => Siswa::all()
         ]);
     }
 
@@ -33,11 +33,10 @@ class SiswaUserController extends Controller
         //
         $validation = $request->validate([
             'name' => 'required',
-            'alamat' => 'required'
-        ]);
-        $validation['jabatan'] = 'siswa';
+            'alamat' => 'required',
+                ]);
         $validation['nomor'] = mt_rand(0000,9999);
-        User::create($validation);
+        Siswa::create($validation);
 
         return redirect('/siswa');
 
@@ -46,7 +45,7 @@ class SiswaUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Siswa $user)
     {
         //
     }
@@ -54,8 +53,9 @@ class SiswaUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Siswa $user)
     {
+
     return view('siswa.edit', [
         'siswa' => $user
     ]);
@@ -64,22 +64,22 @@ class SiswaUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Siswa $user)
     {
         $validate = $request->validate([
             'name' => 'required',
             'alamat' => 'required'
         ]);
-        User::where('nomor', $user->nomor)->update($validate);
+        Siswa::where('nomor', $user->nomor)->update($validate);
         return redirect('/siswa');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Siswa $user)
     {
-        User::destroy($user->id);
+        Siswa::destroy($user->id);
         return redirect('/siswa');
     }
 }

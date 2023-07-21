@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BabPelajaran;
+use App\Models\Mapel;
+use App\Models\Materi;
 use Illuminate\Http\Request;
 
 class BabPelajaranController extends Controller
@@ -12,7 +14,12 @@ class BabPelajaranController extends Controller
      */
     public function index()
     {
-        return view('pelajaran.materi.index');
+        $bab = BabPelajaran::all();
+        $mapel = Mapel::all();
+        return view('pelajaran.materi.index',[
+        'data' => [$mapel,$bab]
+        ]
+        );
     }
 
     /**
@@ -20,7 +27,12 @@ class BabPelajaranController extends Controller
      */
     public function create()
     {
-        return view('pelajaran.materi.createMateri');
+        $data = BabPelajaran::where('user_id', auth()->user()->id)->get();
+        $materi = Mapel::all();
+        return view('pelajaran.materi.showBab', [
+        'data' => [$data, $materi],
+        'jenis' => 'BAB'
+        ]);
     }
 
     /**
@@ -28,15 +40,24 @@ class BabPelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validato = $request->validate([
+            'judul' => 'required|unique:bab_pelajarans,judul',
+            'mapel_id' => 'required'
+        ]);
+        $validato['user_id'] = auth()->user()->id;
+        BabPelajaran::create($validato);
+        return redirect('/bab/create');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BabPelajaran $babPelajaran)
+    public function show(BabPelajaran $bab)
     {
-        //
+        return view('pelajaran.materi.indexMateri',[
+            'data' => [Materi::where('bab_id', $bab->id)->get(), $bab],
+        ]);
+
     }
 
     /**

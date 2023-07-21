@@ -7,7 +7,7 @@
         <form method="post" action="/guru" class="modal-box w-11/12 max-w-5xl block">
           <h3 class="font-bold text-lg text-center mb-5">Guru Baru</h3>
             @csrf
-            <input type="text" placeholder="Masukan Nama Lengkap" class="input border w-full max-w-xs border-slate-800 mb-4" name="name"/>
+            <input type="text" placeholder="Masukan Nama Lengkap" class="input border w-full max-w-xs border-slate-800 mb-4" name="nama"/>
             <br>
             <textarea class="textarea textarea-slate mb-4 border border-black" placeholder="Masukan Alamat" name="alamat"></textarea>
             <br>

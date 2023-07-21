@@ -1,31 +1,29 @@
 @extends('main')
 @section('container')
-<div class="container mt-10 mx-auto border border-slate-200 p-5 rounded-lg">
-<h1 class="text-center text-2xl">Daftar Materi</h1>
-<button class="btn btn-active btn-md btn-success mt-4 mb-4" onclick="my_modal_4.showModal()" >Materi Baru</button>
-<dialog id="my_modal_4" class="modal">
-    <form method="dialog" class="modal-box">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-      <h3 class="font-bold text-lg mt-">Buat Materi Baru</h3>
-      <form action="/" method="post">
+<div class="container mt-10 mx-auto w-full pb-10">
+    <h1 class="text-3xl">Materi Baru</h1>
+    <form action="/materi" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="text" placeholder="Type here" class="input input-bordered input-info w-full max-w-xs" />
-        <button type="submit" class="btn btn-primary block">Buat</button>
-    </form>
-    </form>
-  </dialog>
-<div class=" w-full mx-auto py-10">
-    <a href="">
-    <div class="materi w-full p-5 border border-slate-300 hover:bg-slate-200 rounded-lg active:bg-slate-300 mb-3">
-        <h1 class="text-xl">BAB I Matematika</h1>
-    </div>
-    </a>
+        <div class="form-control w-full max-w-xs mt-5">
+            <label class="label">
+              <span class="label-text">Judul Materi ?</span>
+            </label>
+            <input type="text" placeholder="Type here" class="input w-full border border-black" name="judul"/>
+            <label class="label">
+            </label>
+          </div>
+          <input type="hidden" name="bab_judul" value="{{ $data->judul}}">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Isi Materi ?</span>
+            </label>
+            <input id="x" type="hidden" name="isi">
+            <trix-editor input="x" placeholder="masukan text" class="rounded-xl overflow-scroll h-96"></trix-editor>
+            <label class="label">
+            </label>
+          </div>
 
-    <a href="">
-        <div class="materi w-full p-5 border border-slate-300 hover:bg-slate-200 rounded-lg active:bg-slate-300">
-            <h1 class="text-xl">BAB I Matematika</h1>
-        </div>
-        </a>
-</div>
+        <button type="submit" class="btn btn-success"> Create </button>
+    </form>
 </div>
 @endsection

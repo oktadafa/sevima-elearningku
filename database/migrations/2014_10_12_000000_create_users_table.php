@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string("alamat");
-            $table->string("kelas")->nullable();
             $table->integer("nomor")->unique();
-            $table->string("jabatan");
+            $table->string('email');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
